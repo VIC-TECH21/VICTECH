@@ -1,4 +1,4 @@
-# FRE-VIC_Utilities
+# VICTECH WEB
 
 Allows to program my ESP32 based products in the web browser. No Arduino IDE or VS Code required!
 
