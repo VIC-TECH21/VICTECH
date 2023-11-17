@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content='width=device-width' name='viewport'>
+  <link rel="shortcut icon" href="pictures/VIC TECH LOGO 04102023.jpg">
+  <title>RC LSS Web Flasher</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="module" src="https://unpkg.com/esp-web-tools@7.3.1/dist/web/install-button.js?module">
+  </script>
+
+</head>
+
+<body onload="checkSupported()">
+  <div class="button-container">
+    <button class="button" onclick="window.location.href='index.html'">Home</button>
+    <button class="button" onclick="window.location.href='products.html'">Products and Manuals</button>
+    <button class="button" onclick="window.location.href='flash.html'">VT SLC WEB Sounds Installer</button>
+    <button class="button" onclick="window.location.href='https://www.youtube.com/@frevictechnology/featured'"
+      target=”_blank”>My YouTube Channel</button>
+    <button class="button" onclick="window.location.href='https://www.facebook.com/profile.php?id=100066616574355&mibextid=ZbWKwL'"
+      target=”_blank”>My Facebook Page</button>
+  </div>
+
+  <img src="pictures/VT WLC V1.0.jpg" alt="Logo" width="600">
+
+
+  <div class="main">
+    <h2>VICTECH Wireless Lights Controller Dashboards installer</h2>
+
+    <div id="flasher">
+
+      <p>This installer change the Dashboard design to the VT WLC Tx, please follow the instructions below:</p>
+
+      <ol>
+        <li>Connect your VT WLC Tx device to a USB port </li>
+        <li>Select the Dashboard you want to install </li>
+        <li id="coms">Click "Connect" and then select the correct COM port. <a onclick="showSerialHelp()">No device
+            board found?</a></li>
+        <li>The programming will take less than 3 minutes</li>
+        <li>Restart the VT WLC Tx device</li>
+       
+      </ol><br><br>
+
+      <div class="container inst-button">
+
+        <!-- The selectable builds -->
+        <select id="ver" class="btn" onchange="setManifest()">
+          <optgroup label="Select Dashboard to install">
+            <option
+              data-manifest="webflash/RC_Dashboards\American_1/manifest.json">
+              American 1</option>
+
+            <option
+              data-manifest="webflash/RC_Dashboards\Classic/manifest.json">
+              Classic DIYGUY999</option>
+
+            <option
+              data-manifest="webflash/RC_Dashboards\Multicolor_1/manifest.json">
+              Multicolor 1</option>
+
+            <option
+              data-manifest="webflash/RC_Dashboards\Multicolor_2/manifest.json">
+              Multicolor 2</option>
+
+            <option
+              data-manifest="webflash/RC_Dashboards\European_1/manifest.json">
+              European 1</option>
+
+              <option
+              data-manifest="webflash/RC_Dashboards\European_2/manifest.json">
+              European 2</option>
+                          
+          </optgroup>
+          
+          <optgroup label="Trailer - Test Only - Don't Select it!">
+            <option
+              data-manifest="webflash/RC_Dashboards\Trailer/manifest.json">
+              Trailer</option>
+                                    
+          </optgroup>
+
+        </select><br>
+
+        <esp-web-install-button id="inst">
+          <button class="btn" slot="activate">Connect</button>
+        </esp-web-install-button><br>
+
+      </div>
+      <br><br>Powered by <a href="https://esphome.github.io/esp-web-tools/" target="_blank">ESP Web Tools</a><br>
+      <br>
+      
+      <script>
+        function setManifest() {
+          var sel = document.getElementById('ver');
+          var opt = sel.options[sel.selectedIndex];
+          var m = opt.dataset.manifest;
+          var me = opt.dataset.ethernet;
+          document.getElementById('inst').setAttribute('manifest', m);
+        }
+
+        function checkSupported() {
+          if (document.getElementById('inst').hasAttribute('install-unsupported')) unsupported();
+          else setManifest();
+        }
+
+        function unsupported() {
+          document.getElementById('flasher').innerHTML = "Your Browser is not supported!<br>Please use Desktop Chrome or Edge.<br>"
+        }
+
+        function showSerialHelp() {
+          document.getElementById('coms').innerHTML = `To proceed, click "Connect" and then select the correct COM port.<br><br>
+    You may need drivers for your board.<br>
+    Download and intall the driver from this link:<br>
+    <a href="https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads" target="_blank">CP2102</a><br><br>
+    `;
+        }
+      </script>
+</body>
+
+</html>
